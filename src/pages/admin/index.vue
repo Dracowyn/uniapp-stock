@@ -173,7 +173,14 @@ export default {
 
 		},
 		onWxLogin() {
+			uni.login({
+				"provider": "weixin",
+				success:async (res) => {
+					let code = res.code ? res.code : '';
 
+					let result = await this.$u.api.admin.login();
+				}
+			});
 		},
 		onConfirm() {
 

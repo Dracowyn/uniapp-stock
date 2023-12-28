@@ -12,4 +12,12 @@ Vue.use(uView)
 const app = new Vue({
   ...App
 })
+
+// 引入请求封装，将app参数传递到配置中
+require('services/request.js')(app)
+
+// 引入Api
+import Api from './api/index';
+Vue.use(Api,app);
+
 app.$mount()
