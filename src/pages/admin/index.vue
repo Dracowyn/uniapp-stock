@@ -209,7 +209,7 @@ export default {
 							type: 'error',
 							message: result.msg,
 							complete: () => {
-								let openid = result.data.openid ?? '';
+								let openid = result.data.openid ? result.data.openid : '';
 
 								if (openid) {
 									this.$u.route({
@@ -274,7 +274,7 @@ export default {
 		},
 
 		onShow() {
-			this.LoginAdmin = uni.getStorageSync('LoginAdmin') ?? {};
+			this.LoginAdmin = uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {};
 		},
 	},
 }

@@ -93,7 +93,7 @@ export default {
 						message: result.msg,
 						complete: () => {
 							this.$u.route({
-								url: '/pages/admin/index',
+								type: 'navigateBack'
 							})
 						}
 					})
