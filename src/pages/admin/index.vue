@@ -252,7 +252,9 @@ export default {
 		},
 		// 解除微信绑定
 		async onUnbind() {
-			let result = await this.$u.api.admin.unbind();
+			let result = await this.$u.api.admin.unbind({
+				adminid: this.LoginAdmin.id,
+			});
 
 			if (result.code === 1) {
 				this.$refs.uToast.show({
