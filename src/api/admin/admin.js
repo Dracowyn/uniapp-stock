@@ -11,8 +11,8 @@ export default {
 		url: "admin/land",
 		method: "POST",
 	},
-	unbinding: {
-		url: "admin/unbinding",
+	unbind: {
+		url: "admin/unbind",
 		method: "POST",
 	},
 	avatar: {

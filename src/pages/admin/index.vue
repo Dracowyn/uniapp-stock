@@ -165,27 +165,45 @@ export default {
 		feedback() {
 			console.log('H5端反馈');
 		},
-		changOperation() {
-
+		// 解除微信绑定
+		changOperation(name) {
+			switch (name) {
+				case 'checkmark-circle-fill':
+					this.title = '解除微信绑定';
+					this.content = '确定要解除微信绑定吗？';
+					this.action = 'unbind';
+					this.show = true;
+					break;
+			}
 		},
 		toLogin() {
 
 		},
+		// 注销登录
 		onLogout() {
-
+			this.title = '注销登录';
+			this.content = '确定要注销登录吗？';
+			this.action = 'logout';
+			this.show = true;
 		},
+		// 微信一键登录
 		onWxLogin() {
 			uni.login({
-				"provider": "weixin",
+				provider: "weixin",
 				success: async (res) => {
 					let code = res.code ? res.code : '';
 
 					let result = await this.$u.api.admin.login({code});
 
 					if (result.code === 1) {
-						this.$u.toast('登陆成功');
-						this.$u.setStorage('admin', result.data);
-						this.LoginAdmin = result.data;
+						this.$refs.uToast.show({
+							type: 'success',
+							message: result.msg,
+							complete: () => {
+								uni.setStorageSync('LoginAdmin', result.data);
+								this.LoginAdmin = result.data;
+							}
+						});
 					} else {
 						this.$refs.uToast.show({
 							type: 'error',
@@ -207,9 +225,55 @@ export default {
 				}
 			});
 		},
+		// 确认事件
 		onConfirm() {
+			let action = this.action;
+			this.show = false;
 
-		}
+			switch (action) {
+				case 'logout':
+					this.Logout();
+					break;
+				case 'unbind' :
+					this.onUnbind();
+					break;
+			}
+		},
+		// 注销登录
+		Logout() {
+			this.$refs.uToast.show({
+				type: 'success',
+				message: '注销成功',
+				complete: () => {
+					uni.removeStorageSync('LoginAdmin');
+					this.LoginAdmin = {};
+				}
+			});
+		},
+		// 解除微信绑定
+		async onUnbind() {
+			let result = await this.$u.api.admin.unbind();
+
+			if (result.code === 1) {
+				this.$refs.uToast.show({
+					type: 'success',
+					message: result.msg,
+					complete: () => {
+						uni.removeStorageSync('LoginAdmin');
+						this.LoginAdmin = {};
+					}
+				});
+			} else {
+				this.$refs.uToast.show({
+					type: 'error',
+					message: result.msg,
+				});
+			}
+		},
+
+		onShow() {
+			this.LoginAdmin = uni.getStorageSync('LoginAdmin') ?? {};
+		},
 	},
 }
 </script>
