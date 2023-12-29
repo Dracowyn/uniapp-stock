@@ -75,6 +75,7 @@ export default {
 	},
 	methods: {
 		onBind() {
+			console.log('onBind');
 			this.$refs.uForm.validate().then(async (res) => {
 				let data = {
 					username: this.userInfo.username,
@@ -82,19 +83,22 @@ export default {
 					openid: this.userInfo.openid,
 				}
 
-				let result = await this.$u.api.bind(data);
+				let result = await this.$u.api.admin.bind(data);
+				console.log(result);
 
 				if (result.code === 1) {
+					console.log('bind success')
 					this.$refs.uToast.show({
 						title: '绑定成功',
 						message: result.msg,
 						complete: () => {
 							this.$u.route({
-								type: 'navigateBack'
+								url: '/pages/admin/index',
 							})
 						}
 					})
 				} else {
+					console.log('bind error')
 					this.$refs.uToast.show({
 						type: 'error',
 						message: result.msg,
@@ -105,15 +109,17 @@ export default {
 		}
 	},
 	onLoad(option) {
+		console.log('onLoad')
 		this.userInfo.openid = option.openid;
 	},
 	onReady() {
+		console.log('onReady')
 		this.$refs.uForm.setRules(this.rules);
 	},
 }
 </script>
 
-<style lang="scss">
+<style>
 .container {
 	height: 100%;
 	margin: 0 80rpx;
