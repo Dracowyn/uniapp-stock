@@ -55,7 +55,9 @@
 						暂无角色组
 					</view>
 					<view class="join">
-						加入时间：{{ JSON.stringify(LoginAdmin) != '{}' ? $u.timeFormat(LoginAdmin.createtime, 'yyyy年mm月dd日 hh时MM分') : '无' }}
+						加入时间：{{
+							JSON.stringify(LoginAdmin) != '{}' ? $u.timeFormat(LoginAdmin.createtime, 'yyyy年mm月dd日 hh时MM分') : '无'
+						}}
 					</view>
 				</view>
 				<view class="right">
@@ -175,10 +177,21 @@ export default {
 		onWxLogin() {
 			uni.login({
 				"provider": "weixin",
-				success:async (res) => {
+				success: async (res) => {
 					let code = res.code ? res.code : '';
 
-					let result = await this.$u.api.admin.login();
+					let result = await this.$u.api.admin.login({code});
+
+					if (result.code === 1) {
+						this.$u.toast('登陆成功');
+						this.$u.setStorage('admin', result.data);
+						this.LoginAdmin = result.data;
+					} else {
+						this.$refs.uToast.show({
+							type: 'error',
+							message: result.msg,
+						});
+					}
 				}
 			});
 		},
