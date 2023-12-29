@@ -190,6 +190,18 @@ export default {
 						this.$refs.uToast.show({
 							type: 'error',
 							message: result.msg,
+							complete: () => {
+								let openid = result.data.openid ?? '';
+
+								if (openid) {
+									this.$u.route({
+										url: '/pages/admin/bind',
+										params: {
+											openid: openid
+										}
+									})
+								}
+							}
 						});
 					}
 				}
