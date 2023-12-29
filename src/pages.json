@@ -21,7 +21,22 @@
 			"style": {
 				"navigationBarTitleText": "管理"
 			}
+		},
+		{
+			"path": "pages/admin/bind",
+			"style": {
+				"navigationBarTitleText": "绑定账号",
+				"enablePullDownRefresh": true
+			}
 		}
+		,
+		{
+  "path": "pages/index/agressment",
+  "style": {
+    "navigationBarTitleText": "用户服务协议",
+    "enablePullDownRefresh": true
+  }
+}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
