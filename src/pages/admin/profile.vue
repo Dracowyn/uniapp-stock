@@ -68,6 +68,8 @@ export default {
 							return true;
 						}
 					},
+					type: 'string',
+					required: true,
 					message: '请输入正确的手机号码',
 					trigger: ['blur', 'change'],
 				}],
@@ -77,12 +79,6 @@ export default {
 					message: '请输入正确的邮箱',
 					trigger: ['blur', 'change'],
 				}],
-				password: [{
-					min: 6,
-					max: 20,
-					message: '密码长度为6-20位',
-					trigger: ['blur', 'change'],
-				}]
 			},
 			LoginAdmin: {
 				nickname: '',
@@ -96,7 +92,44 @@ export default {
 	methods: {
 		onSubmit() {
 			console.log('onSubmit');
-			this.$refs.uForm.validate().then(async (res) => {
+			this.$refs.uForm.validate().then(async () => {
+				let data = {
+					nickname: this.LoginAdmin.nickname.trim(),
+					mobile: this.LoginAdmin.mobile.trim(),
+					email: this.LoginAdmin.email.trim(),
+					adminid: this.LoginAdmin.id,
+				}
+
+				if (this.LoginAdmin.password) {
+					if (this.LoginAdmin.password.length < 6 || this.LoginAdmin.password.length > 20) {
+						this.$refs.uToast.show({
+							type: 'error',
+							message: '密码长度为6-20位',
+						});
+						return;
+					}
+					data.password = this.LoginAdmin.password.trim();
+				}
+
+				let result = await this.$u.api.admin.profile(data);
+
+				if (result.code === 1) {
+					this.$refs.uToast.show({
+						type: 'success',
+						message: result.msg,
+						complete: () => {
+							uni.setStorageSync('LoginAdmin', result.data);
+							this.$u.route({
+								type: 'navigateBack'
+							})
+						}
+					});
+				} else {
+					this.$refs.uToast.show({
+						type: 'error',
+						message: result.msg,
+					});
+				}
 			})
 		},
 		deletePic(info) {
