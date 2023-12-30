@@ -45,6 +45,14 @@
     "enablePullDownRefresh": true
   }
 }
+		,
+		{
+  "path": "pages/admin/profile",
+  "style": {
+    "navigationBarTitleText": "修改资料",
+    "enablePullDownRefresh": true
+  }
+}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

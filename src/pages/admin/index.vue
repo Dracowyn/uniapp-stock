@@ -174,6 +174,11 @@ export default {
 					this.action = 'unbind';
 					this.show = true;
 					break;
+				case 'coupon-fill':
+					this.$u.route({
+						url: '/pages/admin/profile',
+					})
+					break;
 			}
 		},
 		// 账号登录

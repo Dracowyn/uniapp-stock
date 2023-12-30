@@ -85,8 +85,11 @@ export default {
 						message: result.msg,
 						complete: () => {
 							uni.setStorageSync('LoginAdmin', result.data);
-							uni.switchTab({
-								url: '/pages/admin/index',
+							// uni.switchTab({
+							// 	url: '/pages/admin/index',
+							// })
+							this.$u.route({
+								type: 'navigateBack'
 							})
 						}
 					})
