@@ -3,6 +3,10 @@ export default {
 		url: "admin/login",
 		method: "POST",
 	},
+	login2: {
+		url: "admin/login2",
+		method: "POST",
+	},
 	bind: {
 		url: "admin/bind",
 		method: "POST",

@@ -37,6 +37,14 @@
     "enablePullDownRefresh": true
   }
 }
+		,
+		{
+  "path": "pages/admin/login",
+  "style": {
+    "navigationBarTitleText": "登录",
+    "enablePullDownRefresh": true
+  }
+}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
