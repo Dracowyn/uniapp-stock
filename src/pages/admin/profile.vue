@@ -136,8 +136,6 @@ export default {
 	},
 	onReady() {
 		this.$refs.uForm.setRules(this.rules);
-	},
-	onShow() {
 		this.LoginAdmin = uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {};
 		if (this.LoginAdmin.avatar_cdn) {
 			this.fileList = [{
