@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="container">
 		<!-- #ifdef MP-WEIXIN -->
 		<view class="avatar xcx">
 			<open-data type="userAvatarUrl"></open-data>
@@ -24,7 +24,7 @@
 					<u--input v-model="userInfo.password" password></u--input>
 				</u-form-item>
 				<!-- 用户协议 -->
-				<u-form-item label=" " prop="agreement" class="item">
+				<u-form-item prop="agreement" class="item">
 					<view class="agreement">
 						<u-checkbox-group v-model="userInfo.agreement">
 							<u-checkbox name="agreement" label="我已阅读并同意"/>
@@ -35,7 +35,9 @@
 			</u--form>
 		</view>
 
-		<u-button type="warning" icon="pushpin-fill" @click="onBind">绑定</u-button>
+		<view style="margin-top: 10px;">
+			<u-button type="warning" icon="pushpin-fill" @click="onBind">绑定</u-button>
+		</view>
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
