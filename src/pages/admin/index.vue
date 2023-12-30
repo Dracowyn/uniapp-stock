@@ -176,8 +176,11 @@ export default {
 					break;
 			}
 		},
+		// 账号登录
 		toLogin() {
-
+			this.$u.route({
+				url: '/pages/admin/login',
+			})
 		},
 		// 注销登录
 		onLogout() {
@@ -272,7 +275,7 @@ export default {
 				});
 			}
 		},
-
+		// 切换到当前页面时触发
 		onShow() {
 			this.LoginAdmin = uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {};
 		},
@@ -303,7 +306,8 @@ page {
 	flex: 3;
 	display: flex;
 	align-items: center;
-	align-content: center;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .info .right {
