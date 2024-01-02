@@ -1,0 +1,99 @@
+<template>
+	<view class="content">
+		<u-cell-group>
+			<u-swipe-action
+				v-for="item in sourceList"
+				:key="item.id"
+				:auto-close="true"
+			>
+				<u-swipe-action-item
+					:options="option2"
+					@click="changeOperation"
+					:name="item.id"
+				>
+					<view class="swiper-action u-border-top u-border-bottom">
+						<view class="swiper-action__content">
+							<u-cell :title="item.name" center/>
+						</view>
+					</view>
+				</u-swipe-action-item>
+
+			</u-swipe-action>
+		</u-cell-group>
+	</view>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			option2: [
+				{
+					text: '编辑',
+					id: 'edit',
+					style: {
+						backgroundColor: '#3c9cff'
+					}
+				},
+				{
+					text: '删除',
+					id: 'del',
+					style: {
+						backgroundColor: '#f56c6c'
+					}
+				}
+			],
+			sourceList: [],
+			show: false,
+			title: '删除',
+			content: '确定删除该客户来源？',
+			btnStyle: {
+				width: '100%',
+				position: 'fixed',
+				bottom: '0',
+			},
+			LoginAdmin: uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {},
+		};
+	},
+	methods: {
+		changeOperation() {
+
+		},
+		toAdd() {
+
+		},
+		confirm() {
+
+		},
+		async getData() {
+			console.log('getData')
+			let result = await this.$u.api.manage.sourceIndex({
+				adminid: this.LoginAdmin.id,
+			});
+
+			if (result.code === 0) {
+				this.$refs.uToast.show({
+					type: 'error',
+					message: result.msg,
+				});
+				return;
+			}
+			this.sourceList = result.data;
+		},
+		onLoad() {
+			console.log('onLoad');
+		},
+		onShow() {
+			console.log('onShow');
+			this.getData();
+		},
+		onReady() {
+			console.log('onReady');
+		},
+	},
+}
+</script>
+
+<style lang="scss">
+
+</style>
