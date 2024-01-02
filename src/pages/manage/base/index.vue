@@ -19,7 +19,8 @@
 				/>
 				<text
 					class="grid-text"
-				>{{ baseListItem.title }}</text>
+				>{{ baseListItem.title }}
+				</text>
 			</u-grid-item>
 		</u-grid>
 	</view>

@@ -20,6 +20,19 @@
 
 			</u-swipe-action>
 		</u-cell-group>
+		<u-button
+			@click="toAdd"
+			:customStyle="btnStyle"
+			color="#19BC9C"
+			type="success">添加</u-button>
+		<u-modal
+			:show="show"
+			title="title"
+			:content='content'
+			:showCancelButton="true"
+			@confirm="confirm"
+			@cancel="show = false"/>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -60,7 +73,9 @@ export default {
 
 		},
 		toAdd() {
-
+			this.$u.route({
+				url: '/pages/manage/source/add',
+			});
 		},
 		confirm() {
 
