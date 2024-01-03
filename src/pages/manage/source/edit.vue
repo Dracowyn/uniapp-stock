@@ -60,7 +60,7 @@ export default {
 			this.$refs.uForm.validate().then(async () => {
 				let data = {
 					adminid: this.LoginAdmin.id,
-					scoureid: this.id,
+					id: this.id,
 					name: this.Source.name,
 				};
 
