@@ -27,7 +27,7 @@
 
 		<view class="title">客户分析</view>
 		<view class="ChartsBox">
-			<qiun-data-charts type="column" :opts="Businessopts" :chartData="BusinessData"/>
+			<qiun-data-charts type="column" :opts="businessOpts" :chartData="businessData"/>
 		</view>
 
 		<u-toast ref="uToast"></u-toast>
@@ -39,13 +39,14 @@ export default {
 	data() {
 		return {
 			LoginAdmin: uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {},
+			month: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
 			total: {
-				OrderCount: 0,
-				OrderMoney: 0,
-				BusinessCount: 0
+				orderCount: 0,
+				orderMoney: 0,
+				businessCount: 0
 			},
-			BusinessData: {},
-			Businessopts: {
+			businessData: {},
+			businessOpts: {
 				color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"],
 				padding: [15, 15, 0, 5],
 				enableScroll: false,
@@ -86,24 +87,23 @@ export default {
 
 			this.total = result.data;
 		},
-		getBusinessData() {
-			//模拟从服务器获取数据时的延时
+		async getBusinessData() {
+			let result = await this.$u.api.controller.getBusinessData({adminid:this.LoginAdmin.id});
 			setTimeout(() => {
-				//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
 				let res = {
-					categories: ["2018", "2019", "2020", "2021", "2022", "2023"],
+					categories: this.month,
 					series: [
 						{
-							name: "目标值",
-							data: [35, 36, 31, 33, 13, 34]
+							name: "未认证",
+							data: result.data.noCertification
 						},
 						{
-							name: "完成量",
-							data: [18, 27, 21, 24, 6, 28]
+							name: "已认证",
+							data: result.data.certification
 						}
 					]
 				};
-				this.BusinessData = JSON.parse(JSON.stringify(res));
+				this.businessData = JSON.parse(JSON.stringify(res));
 			}, 500);
 		},
 	},
@@ -120,13 +120,13 @@ export default {
 
 <style>
 .container {
-	padding: 0px 10px;
+	padding: 0 10px;
 }
 
 .title {
 	font-weight: bold;
 	font-size: 15px;
-	padding: 15px 0px;
+	padding: 15px 0;
 }
 
 .achieve {
