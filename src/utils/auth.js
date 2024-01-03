@@ -11,12 +11,12 @@ const install = (Vue, vm) => {
 				complete: () => {
 					setTimeout(() => {
 						uni.switchTab({
-							url: '/pages/admin/login'
+							url: '/pages/admin/index'
 						});
 					}, 1500);
 				}
 			});
-			return true;
+			return false;
 		}
 
 		return true;

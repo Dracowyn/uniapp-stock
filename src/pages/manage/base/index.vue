@@ -87,6 +87,7 @@ export default {
 	methods: {
 		changeGrid(name) {
 			let authStatus = this.$u.auth.check();
+			console.log(authStatus);
 			if (authStatus === false) {
 				return;
 			}
