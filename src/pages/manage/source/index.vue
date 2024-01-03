@@ -24,10 +24,11 @@
 			@click="toAdd"
 			:customStyle="btnStyle"
 			color="#19BC9C"
-			type="success">添加</u-button>
+			type="success">添加
+		</u-button>
 		<u-modal
 			:show="show"
-			title="title"
+			:title="title"
 			:content='content'
 			:showCancelButton="true"
 			@confirm="confirm"
@@ -69,16 +70,54 @@ export default {
 		};
 	},
 	methods: {
-		changeOperation() {
-
+		changeOperation(name) {
+			console.log('changeOperation:' + name.index);
+			switch (name.index) {
+				case 0:
+					let id = name.name;
+					this.$u.route({
+						url: '/pages/manage/source/edit',
+						params: {
+							id: id
+						}
+					});
+					break;
+				case 1:
+					this.show = true;
+					this.id = name.name;
+					break;
+				default:
+					break;
+			}
 		},
 		toAdd() {
 			this.$u.route({
 				url: '/pages/manage/source/add',
 			});
 		},
-		confirm() {
+		async confirm() {
+			console.log('toDel');
+			let result = await this.$u.api.manage.sourceDel({
+				adminid: this.LoginAdmin.id,
+				id: this.id,
+			});
 
+			if (result.code === 1) {
+				this.$refs.uToast.show({
+					type: 'success',
+					message: result.msg,
+					complete: () => {
+						this.getData();
+					}
+				});
+			} else {
+				this.$refs.uToast.show({
+					type: 'error',
+					message: result.msg,
+				});
+			}
+
+			this.show = false;
 		},
 		async getData() {
 			console.log('getData')
