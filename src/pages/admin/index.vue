@@ -13,7 +13,7 @@
 			</view>
 			<view class="right">
 				<view class="avatar xcx">
-					<u-avatar :src="LoginAdmin.avatar_cdn" size="90"
+					<u-avatar :src="LoginAdmin.avatar_cdn" size="110" shape="circle"
 							  v-if="JSON.stringify(LoginAdmin) !== '{}'"></u-avatar>
 					<!-- 如果没有获取到就会显示微信头像 -->
 					<open-data type="userAvatarUrl" v-else></open-data>
