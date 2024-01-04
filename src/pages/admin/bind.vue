@@ -36,7 +36,7 @@
 		</view>
 
 		<view style="margin-top: 10px;">
-			<u-button type="warning" icon="pushpin-fill" @click="onBind">绑定</u-button>
+			<u-button type="primary" icon="pushpin-fill" @click="onBind">绑定</u-button>
 		</view>
 		<u-toast ref="uToast"></u-toast>
 	</view>

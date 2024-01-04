@@ -10,7 +10,7 @@
 			</u-form-item>
 		</u-form>
 		<view style="margin-top: 25px">
-			<u-button type="warning" @click="onSubmit" text="保存"/>
+			<u-button type="primary" @click="onSubmit" text="保存"/>
 		</view>
 		<u-toast ref="uToast"/>
 	</view>
@@ -90,6 +90,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
+<style>
+.container {
+	padding: 0 10px;
+}
 </style>
