@@ -38,7 +38,6 @@
 export default {
 	data() {
 		return {
-			LoginAdmin: uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {},
 			month: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
 			total: {
 				orderCount: 0,
@@ -108,6 +107,7 @@ export default {
 		},
 	},
 	onShow() {
+		this.LoginAdmin = uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {};
 		let AuthStatus = this.$u.auth.check();
 
 		if (AuthStatus === false) return;
