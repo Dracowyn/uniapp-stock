@@ -30,7 +30,7 @@
 			}
 		},
 		{
-			"path": "pages/index/agressment",
+			"path": "pages/index/agreement",
 			"style": {
 				"navigationBarTitleText": "用户服务协议",
 				"enablePullDownRefresh": true
