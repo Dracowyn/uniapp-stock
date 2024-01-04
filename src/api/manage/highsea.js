@@ -15,6 +15,10 @@ const Highsea = {
 		url: 'manage/highsea/apply',
 		method: 'POST',
 	},
+	highseaAllot: {
+		url: 'manage/highsea/allot',
+		method: 'POST',
+	},
 }
 
 export default Highsea;

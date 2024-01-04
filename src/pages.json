@@ -84,6 +84,13 @@
 				"navigationBarTitleText": "客户详情",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/manage/highsea/allot",
+			"style": {
+				"navigationBarTitleText": "分配客户",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {
