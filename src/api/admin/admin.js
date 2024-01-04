@@ -27,4 +27,8 @@ export default {
 		url: "admin/profile",
 		method: "POST",
 	},
+	list: {
+		url: "admin/list",
+		method: "POST",
+	},
 };
