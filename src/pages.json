@@ -70,6 +70,13 @@
 				"navigationBarTitleText": "编辑客户来源",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/manage/highsea/index",
+			"style": {
+				"navigationBarTitleText": "客户公海",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {

@@ -95,6 +95,9 @@ export default {
 				case 1:
 					this.$u.route('pages/manage/source/index');
 					break;
+				case 2:
+					this.$u.route('pages/manage/highsea/index');
+					break;
 			}
 		}
 	}
