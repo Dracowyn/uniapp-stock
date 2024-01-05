@@ -99,6 +99,14 @@
 				"enablePullDownRefresh": true
 			}
 		}
+		,
+		{
+  "path": "pages/manage/privatesea/info",
+  "style": {
+    "navigationBarTitleText": "客户详情",
+    "enablePullDownRefresh": true
+  }
+}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
