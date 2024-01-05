@@ -58,10 +58,15 @@ export default {
 			})
 			if (result.code === 1) {
 				this.privateseaList = result.data
+			} else {
+				this.$refs.uToast.show({
+					type: 'error',
+					message: result.msg,
+				})
 			}
 		},
 		getInfo(id) {
-			uni.navigateTo({
+			this.$u.route({
 				url: '/pages/manage/privatesea/info',
 				params: {
 					id: id
