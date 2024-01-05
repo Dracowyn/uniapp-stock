@@ -44,6 +44,8 @@ export default {
 			show: false,
 			title: '删除',
 			content: '确定删除该用户？',
+			action: 'del',
+			id: 0,
 			btnStyle: {
 				width: '10%',
 				display: "inline-block",
@@ -83,38 +85,41 @@ export default {
 				}
 			});
 		},
-		async getDelete(id) {
+
+		getDelete(id) {
 			this.show = true;
 			this.title = '删除';
 			this.content = '确定删除该客户？';
-			let result = await this.$u.api.manage.highseaDel({
-				adminid: this.LoginAdmin.id,
-				id: id,
-			});
-			if (result.code === 1) {
-				this.$refs.uToast.show({
-					type: 'success',
-					message: result.msg,
-					complete: () => {
-						this.getData();
-					}
-				});
-			} else {
-				this.$refs.uToast.show({
-					type: 'error',
-					message: result.msg,
-				});
-			}
-			this.show = false;
+			this.action = 'del';
+			this.id = id;
 		},
-		async getApply(id) {
+
+		getApply(id) {
 			this.show = true;
 			this.title = '申领';
 			this.content = '确定申领该客户？';
-			let result = await this.$u.api.manage.highseaApply({
-				adminid: this.LoginAdmin.id,
-				id: id,
-			});
+			this.action = 'apply';
+			this.id = id;
+		},
+
+		async confirm() {
+			let result;
+			if (this.action === 'del') {
+				result = await this.$u.api.manage.highseaDel({
+					adminid: this.LoginAdmin.id,
+					id: this.id,
+				});
+			} else {
+				result = await this.$u.api.manage.highseaApply({
+					adminid: this.LoginAdmin.id,
+					id: this.id,
+				});
+			}
+
+			this.handleResult(result);
+		},
+
+		handleResult(result) {
 			if (result.code === 1) {
 				this.$refs.uToast.show({
 					type: 'success',
@@ -131,6 +136,7 @@ export default {
 			}
 			this.show = false;
 		},
+
 		onShow() {
 			let AuthStatus = this.$u.auth.check();
 			if (AuthStatus === false) return;
