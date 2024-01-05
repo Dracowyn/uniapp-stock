@@ -14,6 +14,10 @@
 					<view class="btn">
 						<u-button type="primary" :customStyle="btnStyle" size="mini" text="详情"
 								  @click="getInfo(item.id)"></u-button>
+						<u-button type="success" :customStyle="btnStyle" size="mini" text="编辑"
+								  @click="getEdit(item.id)"></u-button>
+						<u-button type="warning" :customStyle="btnStyle" size="mini" text="回收"
+								  @click="getRecovery(item.id)"></u-button>
 						<u-button
 							type="error"
 							:customStyle="btnStyle"
@@ -73,6 +77,7 @@ export default {
 				}
 			})
 		},
+
 		getDelete(id) {
 			this.show = true
 			this.id = id
@@ -80,11 +85,28 @@ export default {
 			this.content = '确定删除该客户？'
 			this.action = 'del'
 		},
+
+		getRecovery(id) {
+			this.show = true
+			this.id = id
+			this.title = '回收'
+			this.content = '确定回收该客户？'
+			this.action = 'recovery'
+		},
+
 		async confirm() {
-			let result = await this.$u.api.manage.privateseaDel({
-				id: this.id,
-				adminid: this.LoginAdmin.id,
-			})
+			let result;
+			if (this.action === 'recovery') {
+				result = await this.$u.api.manage.privateseaRecovery({
+					id: this.id,
+					adminid: this.LoginAdmin.id,
+				})
+			} else if (this.action === 'del') {
+				result = await this.$u.api.manage.privateseaDel({
+					id: this.id,
+					adminid: this.LoginAdmin.id,
+				})
+			}
 			this.handleResult(result)
 			this.show = false
 		},
