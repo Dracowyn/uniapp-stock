@@ -23,6 +23,10 @@ const Privatesea = {
 		url: 'manage/privatesea/recovery',
 		method: 'POST',
 	},
+	privateseaAvatar: {
+		url: 'manage/privatesea/avatar',
+		method: 'UPLOAD',
+	},
 }
 
 export default Privatesea;

@@ -15,7 +15,7 @@
 						<u-button type="primary" :customStyle="btnStyle" size="mini" text="详情"
 								  @click="getInfo(item.id)"></u-button>
 						<u-button type="success" :customStyle="btnStyle" size="mini" text="编辑"
-								  @click="getEdit(item.id)"></u-button>
+								  @click="toEdit(item.id)"></u-button>
 						<u-button type="warning" :customStyle="btnStyle" size="mini" text="回收"
 								  @click="getRecovery(item.id)"></u-button>
 						<u-button
@@ -33,6 +33,12 @@
 		<u-modal :show="show" :content='content' :showCancelButton="true" @confirm="confirm"
 				 @cancel="show = false"></u-modal>
 		<u-toast ref="uToast"></u-toast>
+		<u-button
+			@click="toAdd"
+			:customStyle="addBtnStyle"
+			color="#19BC9C"
+			type="success">添加客户
+		</u-button>
 	</view>
 </template>
 
@@ -53,6 +59,11 @@ export default {
 				marginTop: '10px',
 				lineHeight: '20px'
 			},
+			addBtnStyle: {
+				width: '100%',
+				position: 'fixed',
+				bottom: '0',
+			}
 		};
 	},
 	methods: {
@@ -92,6 +103,12 @@ export default {
 			this.title = '回收'
 			this.content = '确定回收该客户？'
 			this.action = 'recovery'
+		},
+
+		toAdd() {
+			this.$u.route({
+				url: '/pages/manage/privatesea/add',
+			})
 		},
 
 		async confirm() {
