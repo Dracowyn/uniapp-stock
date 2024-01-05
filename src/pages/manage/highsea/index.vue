@@ -66,6 +66,11 @@ export default {
 				this.$refs.uToast.show({
 					type: 'error',
 					message: result.msg,
+					complete: () => {
+						this.$u.route({
+							type: 'navigateBack'
+						});
+					}
 				});
 			}
 		},
