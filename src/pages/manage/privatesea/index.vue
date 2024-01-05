@@ -39,7 +39,7 @@ export default {
 			privateseaList: [],
 			show: false,
 			title: '删除',
-			content: '确定删除该用户？',
+			content: '确定删除该客户？',
 			action: 'del',
 			id: 0,
 			btnStyle: {
@@ -76,22 +76,35 @@ export default {
 		getDelete(id) {
 			this.show = true
 			this.id = id
+			this.title = '删除'
+			this.content = '确定删除该客户？'
+			this.action = 'del'
 		},
 		async confirm() {
 			let result = await this.$u.api.manage.privateseaDel({
 				id: this.id,
+				adminid: this.LoginAdmin.id,
 			})
+			this.handleResult(result)
+			this.show = false
+		},
+
+		handleResult(result) {
 			if (result.code === 1) {
 				this.$refs.uToast.show({
-					title: '删除成功',
 					type: 'success',
-					duration: 1500,
-					success: () => {
-						this.getData()
+					message: result.msg,
+					complete: () => {
+						this.getData();
 					}
-				})
+				});
+			} else {
+				this.$refs.uToast.show({
+					type: 'error',
+					message: result.msg,
+				});
 			}
-			this.show = false
+			this.show = false;
 		},
 		onShow() {
 			let AuthStatus = this.$u.auth.check();
