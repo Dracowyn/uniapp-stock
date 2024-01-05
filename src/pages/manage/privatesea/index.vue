@@ -1,0 +1,103 @@
+<template>
+	<view class="content">
+		<u-cell-group>
+			<u-cell :value="item.deal_text" v-for="item in privateseaList" :key="item.id">
+				<view slot="title" class="u-slot-title">
+					<view style="">
+						{{ item.nickname }}
+					</view>
+				</view>
+				<view slot="label" class="u-slot-label">
+					<view style="color:#909193">
+						客户来源：{{ item.source.name ? item.source.name : '未知' }}
+					</view>
+					<view class="btn">
+						<u-button type="primary" :customStyle="btnStyle" size="mini" text="详情"
+								  @click="getInfo(item.id)"></u-button>
+						<u-button
+							type="error"
+							:customStyle="btnStyle"
+							size="mini"
+							text="删除"
+							@click="getDelete(item.id)"
+						>
+						</u-button>
+					</view>
+				</view>
+			</u-cell>
+		</u-cell-group>
+		<u-modal :show="show" :content='content' :showCancelButton="true" @confirm="confirm"
+				 @cancel="show = false"></u-modal>
+		<u-toast ref="uToast"></u-toast>
+	</view>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			privateseaList: [],
+			show: false,
+			title: '删除',
+			content: '确定删除该用户？',
+			action: 'del',
+			id: 0,
+			btnStyle: {
+				width: '10%',
+				display: "inline-block",
+				marginRight: '5px',
+				marginTop: '10px',
+				lineHeight: '20px'
+			},
+		};
+	},
+	methods: {
+		async getData() {
+			let result = await this.$u.api.manage.privateseaIndex({
+				adminid: this.LoginAdmin.id,
+			})
+			if (result.code === 1) {
+				this.privateseaList = result.data
+			}
+		},
+		getInfo(id) {
+			uni.navigateTo({
+				url: '/pages/manage/privatesea/info',
+				params: {
+					id: id
+				}
+			})
+		},
+		getDelete(id) {
+			this.show = true
+			this.id = id
+		},
+		async confirm() {
+			let result = await this.$u.api.manage.privateseaDel({
+				id: this.id,
+			})
+			if (result.code === 1) {
+				this.$refs.uToast.show({
+					title: '删除成功',
+					type: 'success',
+					duration: 1500,
+					success: () => {
+						this.getData()
+					}
+				})
+			}
+			this.show = false
+		},
+		onShow() {
+			let AuthStatus = this.$u.auth.check();
+			if (AuthStatus === false) return;
+			this.LoginAdmin = uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {};
+			this.getData();
+		},
+	},
+}
+</script>
+
+<style lang="scss">
+
+</style>

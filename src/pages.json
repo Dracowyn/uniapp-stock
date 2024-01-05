@@ -91,6 +91,13 @@
 				"navigationBarTitleText": "分配客户",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/manage/privatesea/index",
+			"style": {
+				"navigationBarTitleText": "客户私海",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {
