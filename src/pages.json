@@ -133,6 +133,13 @@
 				"navigationBarTitleText": "回访记录",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/manage/visit/add",
+			"style": {
+				"navigationBarTitleText": "添加回访记录",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {

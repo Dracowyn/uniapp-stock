@@ -15,6 +15,10 @@ const Visit = {
 		url: 'manage/visit/edit',
 		method: 'POST',
 	},
+	visitBusiness: {
+		url: 'manage/visit/business',
+		method: 'POST',
+	},
 }
 
 export default Visit;
