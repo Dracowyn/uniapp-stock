@@ -104,6 +104,9 @@ export default {
 				case 4:
 					this.$u.route('pages/manage/receive/index');
 					break;
+				case 5:
+					this.$u.route('pages/manage/visit/index');
+					break;
 			}
 		}
 	}
