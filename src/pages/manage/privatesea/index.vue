@@ -111,6 +111,15 @@ export default {
 			})
 		},
 
+		toEdit(id) {
+			this.$u.route({
+				url: '/pages/manage/privatesea/edit',
+				params: {
+					id: id
+				}
+			})
+		},
+
 		async confirm() {
 			let result;
 			if (this.action === 'recovery') {
