@@ -97,27 +97,31 @@ export default {
 			})
 		},
 
-		confirm() {
-			let result = this.$u.api.manage.visitDel({
-				id: this.id,
-				adminid: this.LoginAdmin.id,
-			})
+		async confirm() {
+			if (this.action === 'del') {
+				let result = await this.$u.api.manage.visitDel({
+					id: this.id,
+					adminid: this.LoginAdmin.id,
+				})
+				console.log(result.code);
 
-			if (result.code === 1) {
-				this.$refs.uToast.show({
-					type: 'success',
-					message: result.msg,
-					complete: () => {
-						this.getData()
-					}
-				})
-			} else {
-				this.$refs.uToast.show({
-					type: 'error',
-					message: result.msg,
-				})
+				if (result.code === 1) {
+					this.$refs.uToast.show({
+						type: 'success',
+						message: result.msg,
+						complete: () => {
+							this.getData()
+						}
+					})
+				} else {
+					this.$refs.uToast.show({
+						type: 'error',
+						message: result.msg,
+					})
+				}
+				this.show = false
 			}
-			this.show = false
+
 		},
 
 		onShow() {
