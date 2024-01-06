@@ -15,13 +15,13 @@
 						<u-button type="primary" :customStyle="btnStyle" size="mini" text="详情"
 								  @click="getInfo(item.id)"></u-button>
 						<u-button type="success" :customStyle="btnStyle" size="mini" text="还原"
-								  @click="toRecover(item.id)"></u-button>
+								  @click="toRecover(item)"></u-button>
 						<u-button
 							type="error"
 							:customStyle="btnStyle"
 							size="mini"
 							text="删除"
-							@click="toDelete(item.id)"
+							@click="toDelete(item)"
 						>
 						</u-button>
 					</view>
@@ -81,19 +81,19 @@ export default {
 			});
 		},
 
-		toDelete(id) {
-			this.id = id
+		toDelete(item) {
+			this.id = item.id
 			this.show = true
 			this.title = '删除'
-			this.content = '确定彻底删除该客户？'
+			this.content = '确定彻底删除' + item.nickname + '客户？'
 			this.action = 'del'
 		},
 
-		toRecover(id) {
-			this.id = id
+		toRecover(item) {
+			this.id = item.id
 			this.show = true
 			this.title = '还原'
-			this.content = '确定还原该客户？'
+			this.content = '确定还原' + item.nickname + '客户？'
 			this.action = 'recover'
 		},
 
