@@ -5,6 +5,8 @@
 			<u-cell title="性别" v-if="business.gender === '0'" value="保密"></u-cell>
 			<u-cell title="性别" v-else-if="business.gender === '1'" value="男"></u-cell>
 			<u-cell title="性别" v-else value="女"></u-cell>
+			<u-cell title="客户地区" v-if="business.region_text" :value="business.region_text"/>
+			<u-cell title="客户地区" v-else value="未知地区"/>
 			<u-cell title="客户来源" v-if="business.source.name" :value="business.source.name"></u-cell>
 			<u-cell title="客户来源" value="未知来源"></u-cell>
 			<u-cell title="成交状态" :value="business.deal_text"></u-cell>
