@@ -163,8 +163,10 @@ export default {
 			});
 			if (result.code === 1) {
 				this.userInfo = result.data;
-				this.userInfo.sourceName = result.data.source.name;
-				this.userInfo.sourceId = result.data.source.id;
+				if (result.data.source)	{
+					this.userInfo.sourceName = result.data.source.name;
+					this.userInfo.sourceId = result.data.source.id;
+				}
 				this.userInfo.avatar = result.data.avatar;
 				this.userInfo.password = '';
 				this.fileList.push({
@@ -173,6 +175,12 @@ export default {
 					name: 'avatar',
 				})
 			}
+		},
+
+		confirm(e) {
+			this.userInfo.sourceId = e.value[0].id
+			this.userInfo.sourceName = e.value[0].name;
+			this.isSource = false;
 		},
 
 		onSubmit() {
