@@ -107,6 +107,10 @@ export default {
 				case 5:
 					this.$u.route('pages/manage/visit/index');
 					break;
+				case 6:
+					this.$u.route('pages/manage/recyclesea/index');
+					break;
+
 			}
 		}
 	}
