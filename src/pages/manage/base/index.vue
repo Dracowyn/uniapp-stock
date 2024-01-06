@@ -113,6 +113,9 @@ export default {
 				case 7:
 					this.$u.route('pages/manage/subject/index');
 					break;
+				case 8:
+					this.$u.route('pages/manage/product/index');
+					break;
 			}
 		}
 	}

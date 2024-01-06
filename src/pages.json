@@ -168,6 +168,13 @@
 				"navigationBarTitleText": "课程订单",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/manage/product/index",
+			"style": {
+				"navigationBarTitleText": "商品订单",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {
