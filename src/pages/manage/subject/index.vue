@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<u-cell-group>
-			<u-cell :value="'订单金额:'+item.total+'元'" v-for="item in subjectOrderList" :key="item.id">
+			<u-cell v-for="item in subjectOrderList" :key="item.id">
 				<view slot="title" class="u-slot-title">
 					<view style="">
 						订单号：{{ item.code }}
@@ -15,6 +15,11 @@
 				<view slot="label" class="u-slot-label">
 					<view style="color:#909193">
 						课程名称：{{ item.subject.title }}
+					</view>
+				</view>
+				<view slot="label" class="u-slot-label">
+					<view style="color:#909193">
+						订单金额：{{ item.total }} 元
 					</view>
 				</view>
 			</u-cell>
