@@ -85,7 +85,7 @@ export default {
 			this.id = id
 			this.show = true
 			this.title = '删除'
-			this.content = '确定删除该客户？'
+			this.content = '确定彻底删除该客户？'
 			this.action = 'del'
 		},
 
