@@ -72,6 +72,14 @@
 						  suffixIcon="arrow-down">
 				</u--input>
 			</u-form-item>
+			<u-form-item label="地区选择:" prop="region" @click="regionShow = true">
+				<pick-regions :defaultRegion="userInfo.region" @getRegion="handleGetRegion">
+					<u--input v-model="userInfo.region_text" disabled disabledColor="#ffffff" placeholder="请选择地区">
+					</u--input>
+					<u-icon slot="right" name="arrow-right">
+					</u-icon>
+				</pick-regions>
+			</u-form-item>
 		</u--form>
 		<u-button @click="onSubmit" color="#19BC9C">保存</u-button>
 		<!-- 来源数据 -->
@@ -83,7 +91,12 @@
 </template>
 
 <script>
+import pickRegions from '@/components/pick-regions/pick-regions.vue'
+
 export default {
+	components: {
+		pickRegions,
+	},
 	data() {
 		return {
 			userInfo: {
@@ -99,6 +112,8 @@ export default {
 				auth: '0',
 				money: 0.00,
 				avatar: '',
+				region_text: '',
+				regionCode: null,
 			},
 			rules: {
 				nickname: [{
@@ -135,6 +150,7 @@ export default {
 			sourceList: [],
 			isSource: false,
 			fileList: [],
+			regionShow: false,
 		};
 	},
 	onReady() {
@@ -163,7 +179,7 @@ export default {
 			});
 			if (result.code === 1) {
 				this.userInfo = result.data;
-				if (result.data.source)	{
+				if (result.data.source) {
 					this.userInfo.sourceName = result.data.source.name;
 					this.userInfo.sourceId = result.data.source.id;
 				}
@@ -192,6 +208,7 @@ export default {
 					email: this.userInfo.email,
 					avatar: this.userInfo.avatar,
 					gender: this.userInfo.gender,
+					region: this.userInfo.regionCode,
 					sourceid: this.userInfo.sourceId,
 					auth: this.userInfo.auth,
 					money: this.userInfo.money,
@@ -256,6 +273,36 @@ export default {
 					message: result.msg,
 				});
 			}
+		},
+
+		// 地区选择相关方法
+		handleGetRegion(item) {
+			let [province, city, district] = item
+			let region_text = ''
+			let code = null
+			let region = []
+
+			if (province) {
+				region_text += province.name + '-'
+				region.push(province.name)
+				code = province.code
+			}
+
+			if (city) {
+				region_text += city.name + '-'
+				region.push(city.name)
+				code = city.code
+			}
+
+			if (district) {
+				region_text += district.name
+				region.push(district.name)
+				code = district.code
+			}
+
+			this.userInfo.region_text = region_text
+			this.userInfo.regionCode = code
+			console.log('region', code)
 		},
 	},
 }
