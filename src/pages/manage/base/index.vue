@@ -101,6 +101,9 @@ export default {
 				case 3:
 					this.$u.route('pages/manage/privatesea/index');
 					break;
+				case 4:
+					this.$u.route('pages/manage/receive/index');
+					break;
 			}
 		}
 	}

@@ -120,6 +120,14 @@
 				"enablePullDownRefresh": true
 			}
 		}
+		,
+		{
+  "path": "pages/manage/receive/index",
+  "style": {
+    "navigationBarTitleText": "领取记录",
+    "enablePullDownRefresh": true
+  }
+}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
