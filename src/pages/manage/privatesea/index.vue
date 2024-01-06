@@ -17,13 +17,13 @@
 						<u-button type="success" :customStyle="btnStyle" size="mini" text="编辑"
 								  @click="toEdit(item.id)"></u-button>
 						<u-button type="warning" :customStyle="btnStyle" size="mini" text="回收"
-								  @click="getRecovery(item.id)"></u-button>
+								  @click="getRecovery(item)"></u-button>
 						<u-button
 							type="error"
 							:customStyle="btnStyle"
 							size="mini"
 							text="删除"
-							@click="getDelete(item.id)"
+							@click="getDelete(item)"
 						>
 						</u-button>
 					</view>
@@ -89,19 +89,19 @@ export default {
 			})
 		},
 
-		getDelete(id) {
+		getDelete(item) {
 			this.show = true
-			this.id = id
+			this.id = item.id
 			this.title = '删除'
-			this.content = '确定删除该客户？'
+			this.content = '确定删除' + item.nickname + '客户？'
 			this.action = 'del'
 		},
 
-		getRecovery(id) {
+		getRecovery(item) {
 			this.show = true
-			this.id = id
+			this.id = item.id
 			this.title = '回收'
-			this.content = '确定回收该客户？'
+			this.content = '确定回收' + item.nickname + '客户？'
 			this.action = 'recovery'
 		},
 
