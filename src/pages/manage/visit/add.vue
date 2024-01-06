@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<u--form labelPosition="left" labelWidth="70" :model="userInfo" :rules="rules" ref="form1">
+		<u--form labelPosition="left" labelWidth="70" :model="userInfo" :rules="rules" ref="uForm">
 			<u-form-item label="回访客户" prop="nickname" @click="show = true">
 				<u--input v-model="userInfo.nickname" disabled disabledColor="#ffffff" placeholder="请选择回访客户"
 						  suffixIcon="arrow-down">
@@ -44,32 +44,33 @@ export default {
 			show: false,
 		};
 	},
-	methods: {
-		async getBusinessList() {
-			let result = await this.$u.api.manage.visitBusiness({
-				adminid: this.LoginAdmin.id,
+	async onReady() {
+		this.$refs.uForm.setRules(this.rules);
+		let result = await this.$u.api.manage.visitBusiness({
+			adminid: this.LoginAdmin.id,
+		})
+		if (result.code === 1) {
+			this.businessList.push(result.data)
+		} else {
+			this.$refs.uToast.show({
+				type: 'error',
+				message: result.msg,
+				complete: () => {
+					this.$u.route({
+						type: "navigateBack",
+					});
+				}
 			})
-			if (result.code === 1) {
-				this.businessList.push(result.data)
-			} else {
-				this.$refs.uToast.show({
-					type: 'error',
-					message: result.msg,
-					complete: () => {
-						this.$u.route({
-							type: "navigateBack",
-						});
-					}
-				})
-			}
-		},
+		}
+	},
+	methods: {
 		confirm(e) {
 			this.userInfo.nickname = e.value[0].nickname
 			this.userInfo.business_id = e.value[0].id
 			this.show = false;
 		},
 		onSubmit() {
-			this.$refs.form1.validate().then(async () => {
+			this.$refs.uForm.validate().then(async () => {
 				let data = {
 					busid: this.userInfo.business_id,
 					content: this.userInfo.content,
@@ -103,7 +104,6 @@ export default {
 			let AuthStatus = this.$u.auth.check()
 			if (AuthStatus === false) return
 			this.LoginAdmin = uni.getStorageSync('LoginAdmin') ? uni.getStorageSync('LoginAdmin') : {}
-			this.getBusinessList()
 		},
 	},
 }
