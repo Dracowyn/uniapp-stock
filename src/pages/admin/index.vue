@@ -179,6 +179,15 @@ export default {
 						url: '/pages/admin/profile',
 					})
 					break;
+				case 'man-add-fill':
+					this.$u.route({
+						url: '/pages/manage/receive/index',
+					})
+					break;
+				case 'photo-fill':
+					this.$u.route({
+						url: '/pages/manage/visit/index',
+					})
 			}
 		},
 		// 账号登录
