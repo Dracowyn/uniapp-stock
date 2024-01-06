@@ -110,7 +110,9 @@ export default {
 				case 6:
 					this.$u.route('pages/manage/recyclesea/index');
 					break;
-
+				case 7:
+					this.$u.route('pages/manage/subject/index');
+					break;
 			}
 		}
 	}

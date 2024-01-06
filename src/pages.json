@@ -154,15 +154,21 @@
 				"navigationBarTitleText": "客户回收站",
 				"enablePullDownRefresh": true
 			}
-		}
-		,
+		},
 		{
-  "path": "pages/manage/recyclesea/info",
-  "style": {
-    "navigationBarTitleText": "客户详情",
-    "enablePullDownRefresh": true
-  }
-}
+			"path": "pages/manage/recyclesea/info",
+			"style": {
+				"navigationBarTitleText": "客户详情",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/manage/subject/index",
+			"style": {
+				"navigationBarTitleText": "课程订单",
+				"enablePullDownRefresh": true
+			}
+		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
