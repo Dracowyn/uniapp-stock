@@ -163,7 +163,11 @@ export default {
 	},
 	methods: {
 		feedback() {
-			console.log('H5端反馈');
+			// 拉起发送邮件
+			uni.showModal({
+				title: '提示',
+				content: '请发送邮件至：dracowyn@outlook.com'
+			})
 		},
 		// 解除微信绑定
 		changOperation(name) {
