@@ -16,14 +16,14 @@
 								  @click="getInfo(item.id)"></u-button>
 						<u-button type="success" :customStyle="btnStyle" size="mini" text="分配"
 								  @click="getAllot(item.id)"></u-button>
-						<u-button type="warning" :customStyle="btnStyle" size="mini" text="申请"
-								  @click="getApply(item.id)"></u-button>
+						<u-button type="warning" :customStyle="btnStyle" size="mini" text="申领"
+								  @click="getApply(item)"></u-button>
 						<u-button
 							type="error"
 							:customStyle="btnStyle"
 							size="mini"
 							text="删除"
-							@click="getDelete(item.id)"
+							@click="getDelete(item)"
 						>
 						</u-button>
 					</view>
@@ -91,20 +91,20 @@ export default {
 			});
 		},
 
-		getDelete(id) {
+		getDelete(item) {
 			this.show = true;
 			this.title = '删除';
-			this.content = '确定删除该客户？';
+			this.content = '确定删除' + item.nickname + '客户？';
 			this.action = 'del';
-			this.id = id;
+			this.id = item.id;
 		},
 
-		getApply(id) {
+		getApply(item) {
 			this.show = true;
 			this.title = '申领';
-			this.content = '确定申领该客户？';
+			this.content = '确定申领' + item.nickname + '客户？';
 			this.action = 'apply';
-			this.id = id;
+			this.id = item.id;
 		},
 
 		async confirm() {
