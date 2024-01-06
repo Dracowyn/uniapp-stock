@@ -86,6 +86,7 @@ export default {
 			this.show = true
 			this.title = '删除'
 			this.content = '确定删除该客户？'
+			this.action = 'del'
 		},
 
 		toRecover(id) {
@@ -93,13 +94,27 @@ export default {
 			this.show = true
 			this.title = '还原'
 			this.content = '确定还原该客户？'
+			this.action = 'recover'
 		},
 
 		async confirm() {
-			let result = await this.$u.api.manage.recycleseaDel({
-				adminid: this.LoginAdmin.id,
-				id: this.id,
-			})
+			let result;
+			if (this.action === 'del') {
+				result = await this.$u.api.manage.recycleseaDel({
+					adminid: this.LoginAdmin.id,
+					id: this.id,
+				})
+			} else if (this.action === 'recover') {
+				result = await this.$u.api.manage.recycleseaRecover({
+					adminid: this.LoginAdmin.id,
+					id: this.id,
+				})
+			}
+			this.handleResult(result);
+			this.show = false;
+		},
+
+		handleResult(result) {
 			if (result.code === 1) {
 				this.$refs.uToast.show({
 					type: 'success',
